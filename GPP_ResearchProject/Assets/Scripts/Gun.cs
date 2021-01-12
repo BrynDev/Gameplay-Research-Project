@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private GameObject m_BulletTemplate = null;
-    [SerializeField] private int m_ClipSize = 8;
-    [SerializeField] private float m_FireRate = 1.0f;
-    [SerializeField] private Transform m_FireSocket;
-    //private bool m_TriggerPulled = false;
+    [SerializeField] 
+    private GameObject m_BulletTemplate = null;
+    [SerializeField] 
+    private int m_ClipSize = 8;
+    [SerializeField] 
+    private float m_FireRate = 1.0f;
+    [SerializeField] 
+    private Transform m_FireSocket;
+    [SerializeField]
+    private GameObject m_PlayerRef;
+
     private int m_CurrentAmmo = 0;
     private float m_FireTimer = 0.0f;
     private bool m_CanShoot = false;
@@ -34,17 +40,13 @@ public class Gun : MonoBehaviour
             m_FireTimer -= Time.deltaTime;
         }
 
-        if (m_FireTimer <= 0.0f /*&& m_TriggerPulled*/)
+        if (m_FireTimer <= 0.0f)
         {
             if(!m_IsReloading)
             {
                 FireProjectile();
             }         
         }
-
-        //The trigger will release by itself
-        //if still firingm receive new fire input
-        //m_TriggerPulled = false;
     }
 
     private void FireProjectile()
@@ -69,8 +71,8 @@ public class Gun : MonoBehaviour
     
        GameObject newBullet = Instantiate(m_BulletTemplate, m_FireSocket.position, m_FireSocket.rotation);
        Bullet bulletComponent = newBullet.GetComponent<Bullet>();
-        Debug.Log("Fired");
-       //bulletComponent.SetDirection();
+       Vector3 direction = m_PlayerRef.transform.position - m_FireSocket.position; //temp
+       bulletComponent.SetDirection(direction);
 
         //set the time and respect the firerate
         m_FireTimer += 1.0f / m_FireRate;

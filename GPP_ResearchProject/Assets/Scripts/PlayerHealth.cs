@@ -28,9 +28,12 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         m_CurrentHealth -= damage;
+        //make sure health can't go below 0
         m_CurrentHealth = Mathf.Clamp(m_CurrentHealth, 0, m_MaxHealth);
         m_HealthBar.SetHealth(m_CurrentHealth);
+        //stop healing & reset timer
         m_IsHealing = false;
+        m_HealStartDelayTimer = 0.0f;
     }
 
     public void RestoreHealth(int health)
@@ -42,11 +45,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(20);
-        }
-
         if (!m_IsHealing)
         {
             m_HealStartDelayTimer += Time.deltaTime;

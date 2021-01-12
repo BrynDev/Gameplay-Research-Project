@@ -50,10 +50,10 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //make sure to only hit friendlies or enemies
-        if (other.tag != "Friendly" && other.tag != "Enemy")
+        /*if (other.tag != "Player")
         {
             return;
-        }
+        }*/
 
         //make sure not to hit own team
         if (other.tag == tag)
