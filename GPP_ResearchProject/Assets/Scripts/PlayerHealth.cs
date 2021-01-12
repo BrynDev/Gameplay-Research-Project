@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-
-    public int m_MaxHealth = 100;
+    [SerializeField]
+    private int m_MaxHealth = 100;
     private int m_CurrentHealth;
     private bool m_IsHealing = false;
-    public const float m_HealStartDelay = 2.0f;
+    [SerializeField]
+    private const float m_HealStartDelay = 2.0f;
     private float m_HealStartDelayTimer = 0.0f;
-    public const float m_HealTickDelay = 0.5f;
+    [SerializeField]
+    private const float m_HealTickDelay = 0.5f;
     private float m_HealTickTimer = 0.0f;
-    public const int m_HealthRestorePerTick = 2;
+    [SerializeField]
+    private const int m_HealthRestorePerTick = 2;
 
     public HealthBar m_HealthBar;
 

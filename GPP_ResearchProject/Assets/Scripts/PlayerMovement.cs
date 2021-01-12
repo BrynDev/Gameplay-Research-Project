@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController m_Controller;
-    public float m_MoveSpeed = 12.0f;
+    [SerializeField]
+    private CharacterController m_Controller;
+    [SerializeField]
+    private float m_MoveSpeed = 12.0f;
 
     void Update()
     {
