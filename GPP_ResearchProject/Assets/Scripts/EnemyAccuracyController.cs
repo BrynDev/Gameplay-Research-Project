@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class EnemyAccuracyController : MonoBehaviour
 {
-    private float m_TimeToNextHit = 5.0f;
+    private float m_TimeToNextHit = 0.0f;
+    private const float m_BaseHitDelay = 2.5f;
     private float m_Timer;
+
     [SerializeField]
     private GameObject m_PlayerRef;
+    private Rigidbody m_PlayerRigidBody;
     private float m_ExtraOffsetMinX = 0.5f;
     private float m_ExtraOffsetMaxX = 2.0f;
     private float m_ExtraOffsetMinY = 0.2f;
@@ -15,6 +18,10 @@ public class EnemyAccuracyController : MonoBehaviour
     private float m_PlayerHeightOffset;
     private float m_PlayerWidthOffset;
 
+    private void Awake()
+    {
+        m_PlayerRigidBody = m_PlayerRef.GetComponent<Rigidbody>();    
+    }
 
     void Update()
     {
@@ -58,6 +65,54 @@ public class EnemyAccuracyController : MonoBehaviour
 
     private void CalculateTimeToNextHit()
     {
+        float newDelay = m_BaseHitDelay * CalculateDistanceModifier() * CalculateVelocityModifier();
+        m_TimeToNextHit = newDelay;
+    }
+
+    private float CalculateDistanceModifier()
+    {
+        float distanceToTarget = Vector3.Distance(m_PlayerRef.transform.position, gameObject.transform.position);
+        const float maxRange = 20.0f;
+        const float midRange = 10.0f;
+        if (distanceToTarget > maxRange)
+        {
+            //player is far away and is safer
+            return 1.0f;
+        }
+        else if (distanceToTarget > midRange)
+        {
+            //player is slightly more in danger
+            return 0.8f;
+        }
+
+        //player is close to the shooter
+        return 0.5f;
+
+    }
+
+    private float CalculateVelocityModifier()
+    {
+        Vector3 vectorPlayerToEnemy = gameObject.transform.position - m_PlayerRef.transform.position;
+        Vector3 velocityVect = m_PlayerRigidBody.velocity;
+
+        float angle = Vector3.Angle(vectorPlayerToEnemy, velocityVect);
+
+        const float closerAngle = 10.0f;
+        const float furtherAngle = 140.0f; //Vector3.Angle can never return a value greater than 180
+        if(angle > furtherAngle)
+        {
+            //player is running away from the enemy
+            return 1.0f;
+        }
+
+        if(angle < closerAngle)
+        {
+            //player is running towards the enemy
+            return 0.5f;
+        }
+
+        //standard amount
+        return 0.7f;
 
     }
 }
