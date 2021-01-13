@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-   
-    public float m_MouseSensitivity = 500.0f;  
-    public Transform m_PlayerTransform;
+    [SerializeField]
+    private float m_MouseSensitivity = 500.0f;
+
+
     private float m_RotationX = 0.0f;
     private float m_RotationY = 0.0f;
   
@@ -25,9 +26,7 @@ public class CameraController : MonoBehaviour
         m_RotationY += mouseX;
         //make sure camera can't flip vertically
         m_RotationX = Mathf.Clamp(m_RotationX, -90.0f, 90.0f);
-
-        transform.localRotation = Quaternion.Euler(m_RotationX, m_RotationY, 0.0f);
-        //rotate player transform according to camera        
-        m_PlayerTransform.Rotate(Vector3.up * mouseX);
+      
+        transform.localRotation = Quaternion.Euler(m_RotationX, m_RotationY, 0.0f);       
     }
 }
