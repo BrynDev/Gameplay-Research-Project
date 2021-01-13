@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField]
+    
     private float m_Speed = 30.0f;
-    [SerializeField]
+   
     private float m_LifeTime = 10.0f;
-    [SerializeField]
-    private int m_Damage = 5;
+   
+    private int m_Damage = 2;
 
     private void Awake()
     {
@@ -49,12 +49,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //make sure to only hit friendlies or enemies
-        /*if (other.tag != "Player")
-        {
-            return;
-        }*/
-
+     
         //make sure not to hit own team
         if (other.tag == tag)
         {
