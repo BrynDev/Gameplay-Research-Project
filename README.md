@@ -35,6 +35,7 @@ Besides this, the weights and values for each of these rules can also be easily 
 I attempted to demonstrate this hit delay system using a playable Unity project that features one enemy. The rules that were taken into account for calculating the hit delay were the player's velocity and distance in relation to the enemy.
 ![alt text](https://i.gyazo.com/6210f63e13c1af1dcea302bd2b7671ba.png)
 In order to make missed shots feel believable, any bullets that were fired before the hit delay had a small offset applied to their traveling trajectory. This was done in order to create near-misses. The goal is to make the player believe that the AI is making an honest mistake by missing their shots. The result is that the majority of bullets will be aimed at a semicircle around the player's head.
+
 ![alt text](https://i.gyazo.com/a206c7a459db9e00842afd09535a64bd.png)
 
 ### Conclusions
