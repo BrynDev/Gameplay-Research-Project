@@ -19,12 +19,14 @@ public class Gun : MonoBehaviour
     private float m_FireTimer = 0.0f;
     private bool m_CanShoot = false;
     private bool m_IsReloading = false;
+    private EnemyAccuracyController m_AccuracyController;
 
     //[SerializeField] private AudioSource m_FireSound;
 
     private void Awake()
     {
         m_CurrentAmmo = m_ClipSize;
+        m_AccuracyController = gameObject.GetComponent<EnemyAccuracyController>();
     }
 
     void Update()
@@ -71,7 +73,8 @@ public class Gun : MonoBehaviour
     
        GameObject newBullet = Instantiate(m_BulletTemplate, m_FireSocket.position, m_FireSocket.rotation);
        Bullet bulletComponent = newBullet.GetComponent<Bullet>();
-       Vector3 direction = m_PlayerRef.transform.position - m_FireSocket.position; //temp
+        //Vector3 direction = m_PlayerRef.transform.position - m_FireSocket.position; //temp
+       Vector3 direction = m_AccuracyController.FindBulletDirection(newBullet.transform.position);
        bulletComponent.SetDirection(direction);
 
         //set the time and respect the firerate

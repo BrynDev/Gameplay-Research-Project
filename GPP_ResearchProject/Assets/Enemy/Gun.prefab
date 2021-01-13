@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6114555446745651101}
   - component: {fileID: 5336734793083978521}
+  - component: {fileID: 1338617928233283473}
   m_Layer: 7
   m_Name: Gun
   m_TagString: Enemy
@@ -79,6 +80,19 @@ MonoBehaviour:
   m_ClipSize: 50
   m_FireRate: 25
   m_FireSocket: {fileID: 7671538443827482267}
+  m_PlayerRef: {fileID: 0}
+--- !u!114 &1338617928233283473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3456937955438747291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fb4bbbdb55c9944bf63693909bb91a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4535718279814641307
 GameObject:
   m_ObjectHideFlags: 0
